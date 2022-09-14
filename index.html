@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+</head>
+<body>
+
+<form onsubmit="return processForm()" name="eventDetails" id="eventDetails">
+  <h1>Tell me about your event</h1>
+
+  Date:
+  <input type="date" id="when"><br><br>
+  Time:
+  <input type="time" id="whenTime"><br><br>
+  Time Zone:
+  <input type="text" id="whenZone"><br><br>
+  <input type="submit" value="Submit"/>
+</form>
+
+<div class="convertedInfo">
+  <h1> Your event in your timezone will happen:</h1> 
+
+  Date:
+  <input type="date" id="convertedDate" readonly="readonly"><br><br>
+  Time:
+  <input type="time" id="convertedTime" readonly="readonly"><br><br>
+</div>
+
+<form action="https://formsubmit.co/your@email.com" method="POST">
+  <h2>Would you like to email yourself a reminder?</h2>
+
+<!-- TODO: Add email functionality. Perhaps with PHP-->
+  <input type="email" id="usersEmail" required>
+  <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html">
+  <button type="button" onclick="sendEmail()"> Submit</button>
+</form>
+
+<!--Dont know if i want to keep this functionality at the start. May cost money
+<h2>Would you like to add this to your calendar?</h2>
+-->
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

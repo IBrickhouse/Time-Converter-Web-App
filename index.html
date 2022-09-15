@@ -9,9 +9,11 @@
     <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
-
+<div class="eventDetails">
   <h1>Tell me about your event</h1>
 
+  <label>Name of Your Event:</label>
+  <input type="text" id="name"><br><br>
   <label>Date:</label>
   <input type="date" id="when"><br><br>
   <label>Time:</label>
@@ -19,10 +21,13 @@
   <label>Time Zone:</label>
   <input type="text" id="whenZone"><br><br>
   <button type="botton" id="myButton" onclick="readAndConvertEventDate()">Submit</button>
+</div>
 
 <div class="convertedInfo">
-  <h1> Your event in your timezone will happen:</h1> 
+  <h1> Your Event Details In Your Time Zone:</h1> 
 
+  Name:
+  <input type="text" id="eventName" readonly="readonly"><br><br>
   Date:
   <input type="date" id="convertedDate" readonly="readonly"><br><br>
   Time:
@@ -30,7 +35,7 @@
 </div>
 
 <form action="https://formsubmit.co/your@email.com" method="POST">
-  <h2>Would you like to email yourself a reminder?</h2>
+  <h2>Email yourself a reminder?</h2>
 
 <!-- TODO: Add email functionality. Perhaps with PHP-->
   <input type="email" id="usersEmail" required>

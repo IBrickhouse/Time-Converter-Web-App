@@ -1,5 +1,6 @@
 function readAndConvertEventDate() {
     // reads in the input
+    var eventName = document.getElementById("name").value;
     var eventDate = document.getElementById("when").value;
     var eventTime = document.getElementById("whenTime").value;
     var eventZone = document.getElementById("whenZone").value;
@@ -10,6 +11,8 @@ function readAndConvertEventDate() {
     // console.log(eventDate);
     // console.log(eventTime);
     // console.log(timezone);
+
+    document.getElementById("eventName").value = eventName;
 
     let concattedDate = eventDate + 'T' + eventTime + timezone;
     //console.log(concattedDate)
@@ -29,15 +32,15 @@ function readAndConvertEventDate() {
 function getUTCOffset(zone) {
     if (zone === "PST") 
         { return "-08:00"
-    } else if (zone=== "MST") {
+    } else if (zone === "MST") {
         return "-07:00"
-    } else if (zone=== "CST") {
+    } else if (zone === "CST") {
         return "-6:00"
-    } else if (zone=== "AST") {
+    } else if (zone === "AST") {
         return "-04:00"
-    } else if (zone=== "KST") {
+    } else if (zone === "KST") {
         return "+09:00"
-    } else if (zone=== "JST") {
+    } else if (zone === "JST") {
         return "+09:00"
     }
 }

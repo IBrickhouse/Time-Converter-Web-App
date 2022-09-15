@@ -8,17 +8,11 @@ function readAndConvertEventDate() {
     //gets the utc offset for user submitted timezone
     var timezone = getUTCOffset(eventZone);
 
-    // console.log(eventDate);
-    // console.log(eventTime);
-    // console.log(timezone);
-
     document.getElementById("eventName").value = eventName;
 
     let concattedDate = eventDate + 'T' + eventTime + timezone;
-    //console.log(concattedDate)
 
     let convertedDate = new Date(concattedDate);
-    //console.log(convertedDate);
 
     document.getElementById("convertedDate").value = convertedDate.getFullYear() + '-' + (convertedDate.getMonth() + 1)+ '-' + convertedDate.getDate();
 
@@ -41,13 +35,10 @@ function sendEmail(){
     console.log(message)
 
     var email = document.createElement("a");
-    email.href = "mailto:"+addr + "?subject=Your Reminder&body=" + message;
+    email.href = "mailto:"+addr + "?subject=" + name + " reminder&body=" + message;
     email.click();
 }
 
-// var email = document.createElement("a");
-// email.href = "mailto:abc@mail.com";
-// email.click();
 
 function getUTCOffset(zone) {
     if (zone === "PST") 

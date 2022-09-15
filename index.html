@@ -10,17 +10,15 @@
 </head>
 <body>
 
-<form onsubmit="return processForm()" name="eventDetails" id="eventDetails">
   <h1>Tell me about your event</h1>
 
-  Date:
+  <label>Date:</label>
   <input type="date" id="when"><br><br>
-  Time:
+  <label>Time:</label>
   <input type="time" id="whenTime"><br><br>
   Time Zone:
   <input type="text" id="whenZone"><br><br>
-  <input type="submit" value="Submit"/>
-</form>
+  <button type="botton" id="myButton" onclick="readAndConvertEventDate()">Submit</button>
 
 <div class="convertedInfo">
   <h1> Your event in your timezone will happen:</h1> 

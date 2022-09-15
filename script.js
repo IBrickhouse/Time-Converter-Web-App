@@ -1,37 +1,33 @@
-// var convertedDate = "2000-09-21";
-// var convertedTime = "12:00"
+function readAndConvertEventDate() {
+    // reads in the input
+    var eventDate = document.getElementById("when").value;
+    var eventTime = document.getElementById("whenTime").value;
+    var eventZone = document.getElementById("whenZone").value;
 
-// function changeTimezone() {
+    //gets the utc offset for user submitted timezone
+    var timezone = getUTCOffset(eventZone);
 
-//     let date = 
-//         new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-//     console.log('Given IST datetime: ' + date);
+    // console.log(eventDate);
+    // console.log(eventTime);
+    // console.log(timezone);
+
+    let concattedDate = eventDate + 'T' + eventTime + timezone;
+    //console.log(concattedDate)
+
+    let convertedDate = new Date(concattedDate);
+    //console.log(convertedDate);
+
+    document.getElementById("convertedDate").value = convertedDate.getFullYear() + '-' + (convertedDate.getMonth() + 1)+ '-' + convertedDate.getDate();
+
+    const convertedHours = String(convertedDate.getHours()).padStart(2, '0');
+    const ConvertedMinutes = String(convertedDate.getMinutes()).padStart(2, '0');
+
+    document.getElementById("convertedTime").value = hours + ':' + minutes;
   
-//     let usaTime = 
-//         date.toLocaleString("en-US", {
-//             timeZone: "America/New_York" 
-//         });
-//     //console.log('USA datetime: ' + usaTime);
-// }
-
-function processForm() {
-    var date = document.getElementById("when").value;
-    var time = document.getElementById("whenTime").value;
-    var timezone = document.getElementById("whenZone")
-
-    return date
 }
 
-console.log(date)
-
-function convert(){
-
+function getUTCOffset(zone) {
+    if (zone === "KST") {
+        return "+09:00";
+    }
 }
-
-// Puts date on screen
-document.getElementById("convertedDate").value = convertedDate;
-
-document.getElementById("convertedTime").value = convertedTime;
-
-
-

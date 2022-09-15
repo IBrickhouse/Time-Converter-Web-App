@@ -26,22 +26,27 @@
 <div class="convertedInfo">
   <h1> Your Event Details In Your Time Zone:</h1> 
 
-  Name:
-  <input type="text" id="eventName" readonly="readonly"><br><br>
-  Date:
-  <input type="date" id="convertedDate" readonly="readonly"><br><br>
-  Time:
-  <input type="time" id="convertedTime" readonly="readonly"><br><br>
+  <form>
+    <Label>Name:</Label>
+    <input type="text" id="eventName" readonly="readonly">
+    <br><br>
+    <label>Date:</Label>
+    <input type="date" id="convertedDate" readonly="readonly">
+    <br><br>
+    <label>Time:</Label>
+    <input type="time" id="convertedTime" readonly="readonly">
+    <br><br>
+
+    <h2>Email Yourself A Reminder?</h2>
+    <input type="email" id="address">
+    <a button="button" id="email" href="#" onclick="sendEmail()">
+      Click to mail.
+    </a>
+  </form>
 </div>
 
-<form action="https://formsubmit.co/your@email.com" method="POST">
-  <h2>Email yourself a reminder?</h2>
 
-<!-- TODO: Add email functionality. Perhaps with PHP-->
-  <input type="email" id="usersEmail" required>
-  <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html">
-  <button type="button" onclick="sendEmail()"> Submit</button>
-</form>
+
 
 <!--Dont know if i want to keep this functionality at the start. May cost money
 <h2>Would you like to add this to your calendar?</h2>

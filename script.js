@@ -29,6 +29,26 @@ function readAndConvertEventDate() {
   
 }
 
+function sendEmail(){
+    
+    var name = document.getElementById('eventName').value;
+    var date = document.getElementById('convertedDate').value;
+    var time = document.getElementById('convertedTime').value;
+    var addr = document.getElementById('address').value;
+
+    var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " Is On " + date + " At "+ time;
+
+    console.log(message)
+
+    var email = document.createElement("a");
+    email.href = "mailto:"+addr + "?subject=Your Reminder&body=" + message;
+    email.click();
+}
+
+// var email = document.createElement("a");
+// email.href = "mailto:abc@mail.com";
+// email.click();
+
 function getUTCOffset(zone) {
     if (zone === "PST") 
         { return "-08:00"

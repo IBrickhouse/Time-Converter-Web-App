@@ -47,7 +47,7 @@ function getUTCOffset(zone) {
         return "-07:00"
     } else if (zone === "CST") {
         return "-6:00"
-    } else if (zone === "AST") {
+    } else if (zone === "EST") {
         return "-04:00"
     } else if (zone === "KST") {
         return "+09:00"

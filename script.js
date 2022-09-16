@@ -11,7 +11,6 @@ function readAndConvertEventDate() {
     document.getElementById("eventName").value = eventName;
 
     let leadingZeroDate = eventDate.padStart(2, '0');
-    console.log(leadingZeroDate);
 
     let concattedDate = leadingZeroDate + 'T' + eventTime + timezone;
 
@@ -496,7 +495,7 @@ function getUTCOffset(zone) {
 // function getUTCOffset2(zone) {
 //     if (zone === "ACDT" || "Australian Central Daylight Savings Time") {return "+10:30"
 //     } else if (zone === "ACST" || "Australian Central Standard Time") {return "+09:30"
-//     else if (zone === "ACT || "Acre Time	UTC - 5
+//     else if (zone === "ACT || "Acre Time	UTC") - 5
 //     else if (zone === "ACWST || "Australian Central Western Standard Time	UTC + 8: 45
 //     else if (zone === "ADT || "Atlantic Daylight Time	UTC - 3
 //     else if (zone === "AEDT || "Australian Eastern Daylight Savings Time	UTC + 11

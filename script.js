@@ -10,11 +10,14 @@ function readAndConvertEventDate() {
 
     document.getElementById("eventName").value = eventName;
 
-    let concattedDate = eventDate + 'T' + eventTime + timezone;
+    let leadingZeroDate = eventDate.padStart(2, '0');
+    console.log(leadingZeroDate);
+
+    let concattedDate = leadingZeroDate + 'T' + eventTime + timezone;
 
     let convertedDate = new Date(concattedDate);
 
-    document.getElementById("convertedDate").value = convertedDate.getFullYear() + '-' + (convertedDate.getMonth() + 1)+ '-' + convertedDate.getDate();
+    document.getElementById("convertedDate").value = convertedDate.getFullYear() + '-' + String(convertedDate.getMonth() + 1) .padStart(2, '0') + '-' + convertedDate.getDate();
 
     const convertedHours = String(convertedDate.getHours()).padStart(2, '0');
     const ConvertedMinutes = String(convertedDate.getMinutes()).padStart(2, '0');

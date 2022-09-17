@@ -37,7 +37,7 @@ function sendEmail(){
     console.log(message)
 
     var email = document.createElement("a");
-    email.href = "mailto:"+addr + "?subject=" + name + " reminder&body=" + message;
+    email.href = "mailto:"+ addr + "?subject=" + name + " Reminder&body=" + message;
     email.click();
 }
 

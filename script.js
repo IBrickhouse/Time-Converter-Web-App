@@ -58,6 +58,34 @@ function getUTCOffset(zone) {
     }
 }
 
+
+// var d = new Date("2022-10-20 Japan");
+// var n = d.getTimezoneOffset(); // Returns UTC Offset in Minutes
+
+// console.log(n)
+
+function changeTimezone() {
+     
+    //var date = new Date(2022, 9, 20, 12, 0, 0);
+    var date = new Date();
+    console.log(date);
+    // var MyOffset = date.getTimezoneOffset();
+    // console.log(MyOffset/-60);
+
+    let formatter = new Intl.DateTimeFormat('en-US', {dateStyle: 'full', timeStyle: 'long', timeZone: "Asia/Seoul" });   
+    let usDate = formatter.format(date);
+    console.log('Date in Korea: ' + usDate);
+
+}
+
+changeTimezone();
+// console.log(
+//     date.toLocaleString('en-US', {
+//       //timeZone: 'America/Los_Angeles',
+//       timeZone: 'US/Eastern',
+//     }),
+// ); // 👉️ "1/15/2022, 11:54:44 PM"
+
 // function getUTCOffset1(zone) {
 //     if (zone === "KST") {
 //         return "+09:00";

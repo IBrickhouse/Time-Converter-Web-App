@@ -64,21 +64,65 @@ function getUTCOffset(zone) {
 
 // console.log(n)
 
-function changeTimezone() {
-     
-    //var date = new Date(2022, 9, 20, 12, 0, 0);
-    var date = new Date();
-    console.log(date);
-    // var MyOffset = date.getTimezoneOffset();
-    // console.log(MyOffset/-60);
+function changeToUTCTimezone() {
+    //const localTime = new Date(2022, 10, 19, 8, 0, 0);
+    const localTime = new Date();
 
-    let formatter = new Intl.DateTimeFormat('en-US', {dateStyle: 'full', timeStyle: 'long', timeZone: "Asia/Seoul" });   
-    let usDate = formatter.format(date);
-    console.log('Date in Korea: ' + usDate);
+    //let localTimeString = localTime.toString();
+    let localTimeString = localTime.toUTCString();
+
+    console.log("Local Date and Time is: " + localTimeString);
+
+    let formatter = new Intl.DateTimeFormat('en-US', {  weekday: 'long',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    fractionalSecondDigits: 3,
+    hour12: true,
+    timeZone: "Asia/Seoul" 
+    });
+
+    let koreaTime = new Date(formatter.format(localTime));
+    //let koreatimeString = koreaTime.toString();
+    let koreatimeString = koreaTime.toUTCString();
+    console.log('Date and Time in Korea is: ' + koreatimeString);
+
+    localHours = localTime.getHours();
+    console.log(localHours); 
+
+    koreaHours = koreaTime.getHours();
+    console.log(koreaHours);
+}
+
+
+// this isnt working correctly
+function changeTimezoneFlipped() {
+
 
 }
 
-changeTimezone();
+function getTimeDifference() {
+
+}
+
+
+function getOffset() {
+    var date = new Date();
+
+    console.log(date);
+
+    var localOffset = date.getTimezoneOffset();
+    console.log(localOffset/-60);
+}
+
+// getOffset();
+changeToUTCTimezone();
+// changeTimezoneFlipped();
+//getTimeDifference();
+
 // console.log(
 //     date.toLocaleString('en-US', {
 //       //timeZone: 'America/Los_Angeles',

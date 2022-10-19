@@ -19,7 +19,17 @@
   <label>Time:</label>
   <input type="time" id="whenTime"><br><br>
   <label>Time Zone:</label>
-  <input type="text" id="whenZone"><br><br>
+  <!--<input type="text" id="whenZone"><br><br>-->
+  <select id="whenZone">
+    <option value=""></option>
+    <option value="PST">PST</option>
+    <option value="MST">MST</option>
+    <option value="CST">CST</option>
+    <option value="EST">EST</option>
+    <option value="KST">KST</option>
+    <option value="JST">JST</option>
+  </select> 
+  <br><br>
   <button type="botton" id="myButton" onclick="readAndConvertEventDate()">Submit</button>
 </div>
 

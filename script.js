@@ -28,6 +28,19 @@ function readAndConvertEventDate() {
   
 }
 
+function getUTCOffset(){
+    var eventZone = document.getElementById("whenZone").value;
+
+    var local = DateTime.local();
+    var event = local.setZone(eventZone);
+
+    eventTimeString = event.toString();
+    offsetString = eventTimeString.slice(-6)
+    //console.log(eventTimeString.slice(-6));
+
+    return offsetString;
+}
+
 function sendEmail(){
     
     var name = document.getElementById('eventName').value;
@@ -43,37 +56,6 @@ function sendEmail(){
     email.href = "mailto:"+ addr + "?subject=" + name + " Reminder&body=" + message;
     email.click();
 }
-
-
-// function getUTCOffset(zone) {
-//     if (zone === "PST") 
-//         { return "-08:00"
-//     } else if (zone === "MST") {
-//         return "-07:00"
-//     } else if (zone === "CST") {
-//         return "-6:00"
-//     } else if (zone === "EST") {
-//         return "-04:00"
-//     } else if (zone === "KST") {
-//         return "+09:00"
-//     } else if (zone === "JST") {
-//         return "+09:00"
-//     }
-// }
-
-function getUTCOffset(){
-    var eventZone = document.getElementById("whenZone").value;
-
-    var local = DateTime.local();
-    var event = local.setZone(eventZone);
-
-    eventTimeString = event.toString();
-    offsetString = eventTimeString.slice(-6)
-    //console.log(eventTimeString.slice(-6));
-
-    return offsetString;
-}
-
 
 // var d = new Date("2022-10-20 Japan");
 // var n = d.getTimezoneOffset(); // Returns UTC Offset in Minutes
@@ -117,75 +99,6 @@ function changeTimezone() {
 
     return [localHours, koreaHours];
 }
-
-// honestly i cqant tell if this one is working or not
-function changeToUTCTimezone() {
-    //const localTime = new Date(2022, 10, 19, 8, 0, 0);
-    const localTime = new Date();
-
-    //let localTimeString = localTime.toString();
-    let localTimeString = localTime.toUTCString();
-
-    console.log("Local Date and Time is: " + localTimeString);
-
-    let formatter = new Intl.DateTimeFormat('en-US', {  weekday: 'long',
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    fractionalSecondDigits: 3,
-    //hour12: true,
-    timeZone: "Asia/Seoul" 
-    });
-
-    let koreaTime = new Date(formatter.format(localTime));
-    //let koreatimeString = koreaTime.toString();
-    let koreatimeString = koreaTime.toUTCString();
-    console.log('Date and Time in Korea is: ' + koreatimeString);
-
-    localHours = localTime.getHours();
-    console.log(localHours); 
-
-    koreaHours = koreaTime.getHours();
-    console.log(koreaHours);
-
-    return [localHours, koreaHours];
-}
-
-function changeTimezoneFlipped() {
-const localTime = new Date();
-let localTimeString = localTime.toUTCString();
-console.log(localTimeString);
-
-}
-
-// this function might not be needed but im writing it just in case
-function getTimeDifference() {
-    changeToUTCTimezone();
-    console.log(localHours);
-    console.log(koreaHours);
-
-
-
-}
-
-// this function  also might not be needed
-function getOffset() {
-    var date = new Date();
-
-    console.log(date);
-
-    var localOffset = date.getTimezoneOffset();
-    console.log(localOffset/-60);
-}
-
-//changeTimezone();
-// getOffset();
-//changeToUTCTimezone();
-//changeTimezoneFlipped();
-//getTimeDifference();
 
 let timezones = Intl.supportedValuesOf('timeZone');
 

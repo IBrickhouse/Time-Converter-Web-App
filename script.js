@@ -1,3 +1,6 @@
+// KEEP
+var DateTime = luxon.DateTime;
+
 function readAndConvertEventDate() {
     // reads in the input
     var eventName = document.getElementById("name").value;
@@ -42,20 +45,33 @@ function sendEmail(){
 }
 
 
-function getUTCOffset(zone) {
-    if (zone === "PST") 
-        { return "-08:00"
-    } else if (zone === "MST") {
-        return "-07:00"
-    } else if (zone === "CST") {
-        return "-6:00"
-    } else if (zone === "EST") {
-        return "-04:00"
-    } else if (zone === "KST") {
-        return "+09:00"
-    } else if (zone === "JST") {
-        return "+09:00"
-    }
+// function getUTCOffset(zone) {
+//     if (zone === "PST") 
+//         { return "-08:00"
+//     } else if (zone === "MST") {
+//         return "-07:00"
+//     } else if (zone === "CST") {
+//         return "-6:00"
+//     } else if (zone === "EST") {
+//         return "-04:00"
+//     } else if (zone === "KST") {
+//         return "+09:00"
+//     } else if (zone === "JST") {
+//         return "+09:00"
+//     }
+// }
+
+function getUTCOffset(){
+    var eventZone = document.getElementById("whenZone").value;
+
+    var local = DateTime.local();
+    var event = local.setZone(eventZone);
+
+    eventTimeString = event.toString();
+    offsetString = eventTimeString.slice(-6)
+    //console.log(eventTimeString.slice(-6));
+
+    return offsetString;
 }
 
 
@@ -64,6 +80,45 @@ function getUTCOffset(zone) {
 
 // console.log(n)
 
+// i believe this function is working
+function changeTimezone() {
+    //const localTime = new Date(2022, 10, 19, 8, 0, 0);
+    let localDate = new Date();
+
+    let localDateString = localDate.toString();
+    //let localDateString = localDate.toDateString() + " " + localDate.toLocaleTimeString();
+    //let localTimeString = localTime.toUTCString();
+
+    console.log("Local Date and Time is: " + localDateString);
+    //console.log(typeof(localTime));
+
+    let formatter = new Intl.DateTimeFormat('en-US', {  weekday: 'long',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    //fractionalSecondDigits: 3,
+    //hour12: true,
+    timeZone: "Asia/Seoul" 
+    });
+
+    let koreaTime = formatter.format(localDate);
+    let koreatimeString = koreaTime.toString();
+    //let koreatimeString = koreaTime.toUTCString();
+    console.log('Date and Time in Korea is: ' + koreatimeString);
+
+    localHours = localDate.getHours();
+    console.log(localHours); 
+
+    koreaHours = koreaTime.getHours();
+    console.log(koreaHours);
+
+    return [localHours, koreaHours];
+}
+
+// honestly i cqant tell if this one is working or not
 function changeToUTCTimezone() {
     //const localTime = new Date(2022, 10, 19, 8, 0, 0);
     const localTime = new Date();
@@ -81,7 +136,7 @@ function changeToUTCTimezone() {
     minute: 'numeric',
     second: 'numeric',
     fractionalSecondDigits: 3,
-    hour12: true,
+    //hour12: true,
     timeZone: "Asia/Seoul" 
     });
 
@@ -95,20 +150,28 @@ function changeToUTCTimezone() {
 
     koreaHours = koreaTime.getHours();
     console.log(koreaHours);
+
+    return [localHours, koreaHours];
 }
 
-
-// this isnt working correctly
 function changeTimezoneFlipped() {
-
+const localTime = new Date();
+let localTimeString = localTime.toUTCString();
+console.log(localTimeString);
 
 }
 
+// this function might not be needed but im writing it just in case
 function getTimeDifference() {
+    changeToUTCTimezone();
+    console.log(localHours);
+    console.log(koreaHours);
+
+
 
 }
 
-
+// this function  also might not be needed
 function getOffset() {
     var date = new Date();
 
@@ -118,9 +181,10 @@ function getOffset() {
     console.log(localOffset/-60);
 }
 
+//changeTimezone();
 // getOffset();
-changeToUTCTimezone();
-// changeTimezoneFlipped();
+//changeToUTCTimezone();
+//changeTimezoneFlipped();
 //getTimeDifference();
 
 // console.log(

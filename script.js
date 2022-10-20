@@ -91,6 +91,9 @@ function changeTimezone() {
     return [localHours, koreaHours];
 }
 
+// This creates the timezone dropdown on the page.
+// could be moved into a function or script tag 
+// but needs to be kept.
 let timezones = Intl.supportedValuesOf('timeZone');
 
 var select = document.getElementById("whenZone");

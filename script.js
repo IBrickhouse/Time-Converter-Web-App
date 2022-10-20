@@ -1,6 +1,7 @@
 // KEEP
 var DateTime = luxon.DateTime;
 
+// This could be refactored as it does more than one thing
 function readAndConvertEventDate() {
     // reads in the input
     var eventName = document.getElementById("name").value;
@@ -25,7 +26,6 @@ function readAndConvertEventDate() {
     const ConvertedMinutes = String(convertedDate.getMinutes()).padStart(2, '0');
 
     document.getElementById("convertedTime").value = convertedHours + ':' + ConvertedMinutes;
-  
 }
 
 function getUTCOffset(){
@@ -36,7 +36,6 @@ function getUTCOffset(){
 
     eventTimeString = event.toString();
     offsetString = eventTimeString.slice(-6)
-    //console.log(eventTimeString.slice(-6));
 
     return offsetString;
 }
@@ -57,22 +56,15 @@ function sendEmail(){
     email.click();
 }
 
-// var d = new Date("2022-10-20 Japan");
-// var n = d.getTimezoneOffset(); // Returns UTC Offset in Minutes
-
-// console.log(n)
-
-// i believe this function is working
+// I dont think this function is even being called?
+// I'm drunk so i dont feel good enough to remove it
+// but i think i will later.
 function changeTimezone() {
-    //const localTime = new Date(2022, 10, 19, 8, 0, 0);
     let localDate = new Date();
 
     let localDateString = localDate.toString();
-    //let localDateString = localDate.toDateString() + " " + localDate.toLocaleTimeString();
-    //let localTimeString = localTime.toUTCString();
 
     console.log("Local Date and Time is: " + localDateString);
-    //console.log(typeof(localTime));
 
     let formatter = new Intl.DateTimeFormat('en-US', {  weekday: 'long',
     year: 'numeric',
@@ -88,7 +80,6 @@ function changeTimezone() {
 
     let koreaTime = formatter.format(localDate);
     let koreatimeString = koreaTime.toString();
-    //let koreatimeString = koreaTime.toUTCString();
     console.log('Date and Time in Korea is: ' + koreatimeString);
 
     localHours = localDate.getHours();

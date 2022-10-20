@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Development Timezone Converter</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
 <div class="eventDetails">
@@ -19,13 +18,11 @@
   <label>Time:</label>
   <input type="time" id="whenTime"><br><br>
   <label>Time Zone:</label>
-  <!-- <input type="text" id="whenZone"><br><br>-->
   <select id="whenZone">
     <option value=""></option>
   </select>
   <br><br>
   <button type="botton" id="myButton" onclick="readAndConvertEventDate()">Submit</button>
-  <!--<button type="botton" id="myButton" onclick="getUTCOffset()">Offset</button> -->
 </div>
 
 <div class="convertedInfo">

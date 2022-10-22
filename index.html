@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timezone Converter</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="style.css">
-    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
 <div class="eventDetails">
@@ -19,16 +19,10 @@
   <label>Time:</label>
   <input type="time" id="whenTime"><br><br>
   <label>Time Zone:</label>
-  <!--<input type="text" id="whenZone"><br><br>-->
   <select id="whenZone">
     <option value=""></option>
-    <option value="PST">PST</option>
-    <option value="MST">MST</option>
-    <option value="CST">CST</option>
-    <option value="EST">EST</option>
-    <option value="KST">KST</option>
-    <option value="JST">JST</option>
-  </select> 
+  </select>
+
   <br><br>
   <button type="botton" id="myButton" onclick="readAndConvertEventDate()">Submit</button>
 </div>
@@ -55,6 +49,7 @@
   </form>
 </div>
 
+<script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

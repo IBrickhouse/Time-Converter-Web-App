@@ -20,7 +20,7 @@ function readAndConvertEventDate() {
 
     let convertedDate = new Date(concattedDate);
 
-    document.getElementById("convertedDate").value = convertedDate.getFullYear() + '-' + String(convertedDate.getMonth() + 1) .padStart(2, '0') + '-' + convertedDate.getDate();
+    document.getElementById("convertedDate").value = convertedDate.getFullYear() + '-' + String(convertedDate.getMonth() + 1) .padStart(2, '0') + '-' + String(convertedDate.getDate()) .padStart(2, '0');
 
     const convertedHours = String(convertedDate.getHours()).padStart(2, '0');
     const ConvertedMinutes = String(convertedDate.getMinutes()).padStart(2, '0');

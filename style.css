@@ -9,6 +9,22 @@ body {
     text-align: center;
 }
 
+ul.navbar {
+
+    padding: 0px;
+    text-align: center;
+}
+
+ul.navbar > li {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: skyblue;
+}
+
+ul.navbar > li:hover {
+    background-color: greenyellow;
+}
+
 input[type="text"] {
     width: 110px;
 }
@@ -29,13 +45,6 @@ input[type="time"] {
 .convertedInfo {
     color: #FF5FA2;
 }
-
-/* 
-form {
-    color: blue;
-    align-items: center;
-}
- */
 
 .show {display: block;}
 

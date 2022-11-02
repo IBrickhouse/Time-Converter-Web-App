@@ -1,33 +1,64 @@
 body {
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background-color: white;
-    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-ul.navbar {
+div.body {
+  width: 1000px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: white;
+  text-align: center;
+  font-size: 100%;
+}
 
-    padding: 0px;
+@media (max-width: 600px) {
+  div.body {
+     width: 500px;
+  }
+}
+
+div.myheader {
+    height: auto;
     text-align: center;
+    width: auto;
 }
 
-ul.navbar > li {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: skyblue;
+.navbar { 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightgray;
+    width:auto;
+    margin:0 auto;
+    display: flex;
+    border: 1px solid black;    
 }
 
-ul.navbar > li:hover {
-    background-color: greenyellow;
+ul.navbar {
+    margin: 5px;
+    padding: 1%;
+    list-style-type: none;
+    text-align: center;
+    justify-content: center;
+    
 }
 
+.pageitem {
+    margin:0 auto;
+    width:auto;
+    /* border: 1px solid yellow; */
+}
+
+.item:hover {
+    background-color: yellowgreen;
+}
+ 
 input[type="text"] {
-    width: 110px;
+    width: 120px;
 }
 
 input[type="date"] {
@@ -38,17 +69,38 @@ input[type="time"] {
     width: 120px;
 }
 
-.eventDetails {
+#eventDetails {
+    height: auto;
+    width: auto;
     color: #FCC89B;
     position: relative;
+    margin: auto;
+    padding: auto;
+    border: 5px solid pink;
+    padding: 5px;
+    text-align: center;
 }
 
-.convertedInfo {
+#convertedInfo {
+    height: auto;
+    width: auto;
     color: #FF5FA2;
+    margin: auto;
+    padding: auto;
+    border: 5px solid pink;
+    padding: 5px;
+    text-align: center;
 }
 
-.show {display: block;}
 
-h2 {
+#emailReminder {
+    height: auto;
+    width: auto;
     color: red;
+    margin: auto;
+    padding: auto;
+    border: 5px solid pink;
+    padding: 5px;
+    text-align: center;
 }
+

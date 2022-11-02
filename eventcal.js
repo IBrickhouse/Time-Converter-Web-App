@@ -4,6 +4,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
+
 async function loadData() {
     const { data, error } = await _supabase
             .from('groups')
@@ -23,4 +24,5 @@ async function loadData() {
     
 }
 
+// I believe this should be run at each load. Supabase's own code
 loadData()

@@ -69,7 +69,7 @@ async function loadGroupMembers() {
 async function groupMemberNamesOnScreen() {
     const { data, error } = await _supabase
         .from('groups')
-        .select(`name, members(*)`)
+        .select(`*, members(*)`)
         // .eq('company_id', 'eb6903f5-bcd5-419a-9fdc-73ed92f811c1')
 
     if(!error) {
@@ -79,10 +79,10 @@ async function groupMemberNamesOnScreen() {
         let contents = ''
         data.forEach(function(group){
 
-            contents += `<div> ${group.name}</div>`
+            contents += `<div> ${group.name} - Debut: ${group.debut}</div>`
 
             group.members.forEach(function(member) {
-                contents += `<div> &emsp; ${member.romanized_name} - ${member.birthday} </div>`
+                contents += `<div> &emsp; ${member.romanized_name} - Birthday: ${member.birthday} </div>`
             })
         })
 

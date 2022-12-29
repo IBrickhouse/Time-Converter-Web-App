@@ -14,7 +14,7 @@ async function loadData() {
 
         let contents = ''
         data.forEach(function(item){
-            contents += `<div> ${item.date} - ${item.name} - ${item.description} </div>`
+            contents += `<div> &#8226; ${item.name} - ${item.date} - ${item.time} - ${item.timezone} - ${item.description} </div>`
  
         })
 

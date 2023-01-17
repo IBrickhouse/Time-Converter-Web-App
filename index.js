@@ -49,10 +49,10 @@ async function addEvent() {
     const { data, error } = await _supabase
             .from('test')
             .insert([
-            { date: document.getElementById("when").value, 
-            name: document.getElementById("name").value,
-            description:document.getElementById("name").value,
-            time:document.getElementById("whenTime").value,
+            { name: document.getElementById("name").value, 
+            description: document.getElementById("eventDescription").value,
+            date: document.getElementById("when").value,
+            time: document.getElementById("whenTime").value,
             timezone: document.getElementById("whenZone").value,
         },
         ])

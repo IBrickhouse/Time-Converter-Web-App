@@ -29,11 +29,17 @@
   <h1>Tell Me About Your Event</h1>
 
   <label>Name:</label>
-  <input type="text" id="name"><br><br>
+  <input type="text" id="name">
+  <br><br>
+  <Label>Description:</Label>
+  <input type="textbox" id="eventDescription">
+  <br><br>
   <label>Date:</label>
-  <input type="date" id="when"><br><br>
+  <input type="date" id="when">
+  <br><br>
   <label>Time:</label>
-  <input type="time" id="whenTime"><br><br>
+  <input type="time" id="whenTime">
+  <br><br>
   <label>Time Zone:</label>
   <select id="whenZone">
     <option value=""></option>
@@ -54,11 +60,11 @@
   <h1> Your Event Details In Your Time Zone:</h1> 
 
   <form>
-    <Label>Name:</Label>
-    <input type="text" id="eventName" readonly="readonly">
-    <br><br>
     <label>Date:</Label>
     <input type="date" id="convertedDate" readonly="readonly">
+    <br><br>
+    <Label>Name:</Label>
+    <input type="text" id="eventName" readonly="readonly">
     <br><br>
     <label>Time:</Label>
     <input type="time" id="convertedTime" readonly="readonly">

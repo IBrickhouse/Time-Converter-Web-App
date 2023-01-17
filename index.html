@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Development Timezone Converter</title>
     <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -39,7 +40,14 @@
   </select>
 
   <br><br>
+  <!-- Submit button -->
   <button type="botton" id="myButton" onclick="readAndConvertEventDate()">Submit</button>
+
+  <!-- Database checkmark -->
+  <h2>Share with others?</h2>
+  <input type="checkbox" id="switch" onclick="addEvent()">
+  <!-- placeholder button for testing -->
+  <!-- <button type="botton" id="myButton" onclick="addEvent()">Sure!</button> -->
 </div>
 
 <div id="convertedInfo">
@@ -67,5 +75,6 @@
 </div>
 
   <script src="index.js"></script>
+  
 </body>
 </html>

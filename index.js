@@ -1,6 +1,11 @@
 // KEEP
 var DateTime = luxon.DateTime;
 
+const SUPABASE_URL = 'https://zbrjiavyonirzvqxxwos.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpicmppYXZ5b25pcnp2cXh4d29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjE5MTIwNDgsImV4cCI6MTk3NzQ4ODA0OH0.96Pz1SXA4pVD38tafalrT5Z2J8MZlNEXXnZ0CGGkLKw'
+
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
 // This could be refactored as it does more than one thing
 function readAndConvertEventDate() {
     // reads in the input
@@ -38,6 +43,25 @@ function getUTCOffset(){
     offsetString = eventTimeString.slice(-6)
 
     return offsetString;
+}
+
+async function addEvent() {
+    var decider = document.getElementById('switch');
+    if(decider.checked){
+        alert('check');
+        const { data, error } = await _supabase
+            .from('test')
+            .insert([
+            { date: document.getElementById("when").value, 
+              name: document.getElementById("name").value,
+              description:document.getElementById("name").value,
+              time:document.getElementById("whenTime").value,
+              timezone: document.getElementById("whenZone").value,
+            },
+        ])
+    } else {
+      alert('unchecked');
+    }
 }
 
 function sendEmail(){

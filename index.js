@@ -1,6 +1,11 @@
 // KEEP
 var DateTime = luxon.DateTime;
 
+const SUPABASE_URL = 'https://zbrjiavyonirzvqxxwos.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpicmppYXZ5b25pcnp2cXh4d29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjE5MTIwNDgsImV4cCI6MTk3NzQ4ODA0OH0.96Pz1SXA4pVD38tafalrT5Z2J8MZlNEXXnZ0CGGkLKw'
+
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
 // This could be refactored as it does more than one thing
 function readAndConvertEventDate() {
     // reads in the input
@@ -39,6 +44,24 @@ function getUTCOffset(){
 
     return offsetString;
 }
+
+async function addEvent() {
+    const { data, error } = await _supabase
+            .from('test')
+            .insert([
+            { name: document.getElementById("name").value, 
+            description: document.getElementById("eventDescription").value,
+            date: document.getElementById("when").value,
+            time: document.getElementById("whenTime").value,
+            timezone: document.getElementById("whenZone").value,
+        },
+        ])
+
+    const yesButton = document.getElementById("addButton");
+
+    yesButton.replaceWith("Thanks!")
+}
+
 
 function sendEmail(){
     

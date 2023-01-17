@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Development Timezone Converter</title>
     <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -28,29 +29,42 @@
   <h1>Tell Me About Your Event</h1>
 
   <label>Name:</label>
-  <input type="text" id="name"><br><br>
+  <input type="text" id="name">
+  <br><br>
+  <Label>Description:</Label>
+  <input type="textbox" id="eventDescription">
+  <br><br>
   <label>Date:</label>
-  <input type="date" id="when"><br><br>
+  <input type="date" id="when">
+  <br><br>
   <label>Time:</label>
-  <input type="time" id="whenTime"><br><br>
+  <input type="time" id="whenTime">
+  <br><br>
   <label>Time Zone:</label>
   <select id="whenZone">
     <option value=""></option>
   </select>
 
   <br><br>
+  <!-- Submit button -->
   <button type="botton" id="myButton" onclick="readAndConvertEventDate()">Submit</button>
+
+  <!-- Database checkmark -->
+  <h2>Share with others?</h2>
+  <!-- <input type="checkbox" id="switch" onclick="addEvent()"> -->
+  <!-- placeholder button for testing -->
+  <button type="botton" id="addButton" onclick="addEvent()">Sure!</button>
 </div>
 
 <div id="convertedInfo">
   <h1> Your Event Details In Your Time Zone:</h1> 
 
   <form>
-    <Label>Name:</Label>
-    <input type="textarea" id="eventName" readonly="readonly">
-    <br><br>
     <label>Date:</Label>
     <input type="date" id="convertedDate" readonly="readonly">
+    <br><br>
+    <Label>Name:</Label>
+    <input type="text" id="eventName" readonly="readonly">
     <br><br>
     <label>Time:</Label>
     <input type="time" id="convertedTime" readonly="readonly">
@@ -67,5 +81,6 @@
 </div>
 
   <script src="index.js"></script>
+  
 </body>
 </html>

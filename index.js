@@ -47,7 +47,7 @@ function getUTCOffset(){
 
 async function addEvent() {
     const { data, error } = await _supabase
-            .from('test')
+            .from('events')
             .insert([
             { name: document.getElementById("name").value, 
             description: document.getElementById("eventDescription").value,

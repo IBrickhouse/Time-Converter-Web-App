@@ -46,23 +46,22 @@ function getUTCOffset(){
 }
 
 async function addEvent() {
-    var decider = document.getElementById('switch');
-    if(decider.checked){
-        alert('check');
-        const { data, error } = await _supabase
+    const { data, error } = await _supabase
             .from('test')
             .insert([
             { date: document.getElementById("when").value, 
-              name: document.getElementById("name").value,
-              description:document.getElementById("name").value,
-              time:document.getElementById("whenTime").value,
-              timezone: document.getElementById("whenZone").value,
-            },
+            name: document.getElementById("name").value,
+            description:document.getElementById("name").value,
+            time:document.getElementById("whenTime").value,
+            timezone: document.getElementById("whenZone").value,
+        },
         ])
-    } else {
-      alert('unchecked');
-    }
+
+    const yesButton = document.getElementById("addButton");
+
+    yesButton.replaceWith("Thanks!")
 }
+
 
 function sendEmail(){
     

@@ -36,7 +36,7 @@ async function findPastEventRecord() {
     const { data, error } = await _supabase
             .from('upcomingevents')
             .select('*')
-            .eq('date', today)
+            .lt('date', today)
             
     if(!error) {
 
@@ -63,7 +63,7 @@ async function findPastEventRecord() {
 
 async function insertRow(pastRow) {
     const { data, error } = await _supabase
-    .from('upcomingevents_test')
+    .from('pastevents')
     .insert([
       {name: pastRow.name, description: pastRow.description, date: pastRow.date, time: pastRow.time, timezone: pastRow.timezone, reoccurring: pastRow.reoccurring},
     ])
@@ -82,7 +82,7 @@ async function removeRow(pastRow) {
     const { data, error } = await _supabase
             .from('upcomingevents')
             .delete()
-            .eq('date', today)
+            .lt('date', today)
     
 }
 

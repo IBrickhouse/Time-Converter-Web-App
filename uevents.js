@@ -79,7 +79,7 @@ async function findReoccurringEventRecord() {
     if(!error) {
 
         data.forEach(function(item){
-            console.log(item);
+            //console.log(item);
             insertReoccurringRow(item);
         })
     }

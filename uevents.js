@@ -40,23 +40,6 @@ async function findPastEventRecord() {
             
     if(!error) {
 
-        data.forEach(function(item){
-            console.log(item);
-            insertRow(item);
-            removeRow(item);
-        })
-
-        //loop display data here
-        const parent = document.getElementById('holder')
-
-        let contents = ''
-        data.forEach(function(item){
-            contents += `<div> &#8226; ${item.name} - ${item.date} - ${item.time} - ${item.timezone} - ${item.description} </div>`
-
-        })
-
-        parent.insertAdjacentHTML('beforeend', contents)
-
     }
     
 }
@@ -70,7 +53,7 @@ async function insertRow(pastRow) {
     
 }
 
-async function removeRow(pastRow) {
+async function removePastRow(pastRow) {
 
     var currentTime = new Date()
     var month = currentTime.getMonth() + 1
@@ -86,5 +69,33 @@ async function removeRow(pastRow) {
     
 }
 
+async function findReoccurringEventRecord() {
+    
+    const { data, error } = await _supabase
+            .from('upcomingevents')
+            .select('*')
+            .eq('reoccurring', true)
+            
+    if(!error) {
+
+        data.forEach(function(item){
+            console.log(item);
+            insertReoccurringRow(item);
+        })
+    }
+    
+}
+
+async function insertReoccurringRow(reoccurringRow) {
+    const { data, error } = await _supabase
+    .from('reoccuringevents')
+    .upsert(
+      { name: reoccurringRow.name, description: reoccurringRow.description, date: reoccurringRow.date, time: reoccurringRow.time, timezone: reoccurringRow.timezone, reoccurring: reoccurringRow.reoccurring},
+      { onConflict: 'name'}
+    )
+    
+}
+
 loadData();
 findPastEventRecord();
+findReoccurringEventRecord();

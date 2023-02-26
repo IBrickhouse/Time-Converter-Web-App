@@ -5,7 +5,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 async function loadData() {
     const { data, error } = await _supabase
-            .from('events')
+            .from('reoccuringevents')
             .select('*')
 
     if(!error) {

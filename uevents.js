@@ -65,7 +65,7 @@ async function insertRow(pastRow) {
     const { data, error } = await _supabase
     .from('upcomingevents_test')
     .insert([
-      {name: pastRow.name, description: pastRow.description, date: pastRow.date, time: pastRow.time, timezone: pastRow.timezone, recurring: pastRow.recurring},
+      {name: pastRow.name, description: pastRow.description, date: pastRow.date, time: pastRow.time, timezone: pastRow.timezone, reoccurring: pastRow.reoccurring},
     ])
     
 }

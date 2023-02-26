@@ -4,11 +4,13 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 async function loadData() {
+
     const { data, error } = await _supabase
             .from('upcomingevents')
             .select('*')
 
     if(!error) {
+
         //loop display data here
         const parent = document.getElementById('holder')
 
@@ -30,7 +32,6 @@ async function findPastEventRecord() {
     var day = currentTime.getDate()
     var year = currentTime.getFullYear()
     var today =(String(year) + "-" + String(month) .padStart(2,'0')) + "-" + String(day) .padStart(2,'0');
-    console.log(today);
     
     const { data, error } = await _supabase
             .from('upcomingevents')
@@ -38,8 +39,6 @@ async function findPastEventRecord() {
             .eq('date', today)
             
     if(!error) {
-
-        //console.log(data);
 
         data.forEach(function(item){
             console.log(item);
@@ -87,6 +86,5 @@ async function removeRow(pastRow) {
     
 }
 
-// loadData();
-
+loadData();
 findPastEventRecord();

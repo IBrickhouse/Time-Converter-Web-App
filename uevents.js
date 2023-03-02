@@ -16,7 +16,7 @@ async function loadData() {
 
         let contents = ''
         data.forEach(function(item){
-            contents += `<div> &#8226; ${item.name} - ${item.description} - ${item.date.replaceAll('-', '/')} - ${item.time} - ${item.timezone} - ${item.description} </div>`
+            contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone}</div>`
  
         })
 
@@ -37,14 +37,25 @@ async function findPastEventRecord() {
             .from('upcomingevents')
             .select('*')
             .lt('date', today)
-            
-    if(!error) {
 
+    if(!error) {
+        // Length will only be over 0 if a past record is found.
+        if(data.length > 0) {
+            data.forEach(function(item){
+                //console.log('I did something');     
+                insertPastRecord(item);
+                removePastRecord(item);
+            })
+        }
+        else {
+            //console.log("I didnt do anything");
+            {};
+        }
     }
     
 }
 
-async function insertRow(pastRow) {
+async function insertPastRecord(pastRow) {
     const { data, error } = await _supabase
     .from('pastevents')
     .insert([
@@ -53,14 +64,14 @@ async function insertRow(pastRow) {
     
 }
 
-async function removePastRow(pastRow) {
+async function removePastRecord(pastRow) {
 
     var currentTime = new Date()
     var month = currentTime.getMonth() + 1
     var day = currentTime.getDate()
     var year = currentTime.getFullYear()
     var today =(String(year) + "-" + String(month) .padStart(2,'0')) + "-" + String(day) .padStart(2,'0');
-    console.log(today);
+    //console.log(today);
 
     const { data, error } = await _supabase
             .from('upcomingevents')

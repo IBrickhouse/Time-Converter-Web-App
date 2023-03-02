@@ -5,7 +5,7 @@ const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 async function loadData() {
     const { data, error } = await _supabase
-            .from('events')
+            .from('reoccuringevents')
             .select('*')
 
     if(!error) {
@@ -14,7 +14,7 @@ async function loadData() {
 
         let contents = ''
         data.forEach(function(item){
-            contents += `<div> &#8226; ${item.name} - ${item.date} - ${item.time} - ${item.timezone} - ${item.description} </div>`
+            contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.slice(5).replace('-', '/')} at ${item.time} in ${item.timezone}</div>`
  
         })
 

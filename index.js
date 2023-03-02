@@ -46,14 +46,21 @@ function getUTCOffset(){
 }
 
 async function addEvent() {
+    if (document.getElementById('reoccurring').checked) {
+        recTest = document.getElementById("reoccurring").value
+    } else {
+        recTest = false
+    }
+    
     const { data, error } = await _supabase
-            .from('events')
+            .from('upcomingevents')
             .insert([
             { name: document.getElementById("name").value, 
             description: document.getElementById("eventDescription").value,
             date: document.getElementById("when").value,
             time: document.getElementById("whenTime").value,
             timezone: document.getElementById("whenZone").value,
+            reoccurring: recTest,
         },
         ])
 

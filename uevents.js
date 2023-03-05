@@ -15,12 +15,19 @@ async function loadData() {
         const parent = document.getElementById('holder')
 
         let contents = ''
+        let emailButton = ''
         data.forEach(function(item){
-            contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone}</div>`
- 
+            contents += 
+                `<div> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone} 
+                <br>
+                <button onclick="convertedEmailReminder()">Remind me!</button>
+                <br><br>
+                </div>`
+            //emailButton += `<p>test</p>`
         })
 
         parent.insertAdjacentHTML('beforeend', contents)
+        parent.insertAdjacentHTML('beforeend', emailButton)
     }
     
 }
@@ -105,6 +112,12 @@ async function insertReoccurringRow(reoccurringRow) {
       { onConflict: 'name'}
     )
     
+}
+
+function convertedEmailReminder(item) {
+    alert("I got clicked");
+    eventR = item;
+    console.log(eventR);
 }
 
 loadData();

@@ -152,20 +152,18 @@ function getUTCOffset(eventZone){
 
 function sendEmailReminder(eventName, yourDate){
     var name = eventName;
-    console.log(name);
     var date = yourDate;
-    console.log(date);
-    var localeDate = date.toLocaleString().replaceAll('/', '-');
-    console.log(localeDate);
-    var onlyDate = localeDate.slice(0, 10);
-    console.log(onlyDate);
-    var time = localeDate.slice(12, 16)
-    console.log(time);
+    //console.log(yourDate);
+    var formattedDate = String(yourDate.getFullYear()) + '/' + String(yourDate.getMonth() + 1).padStart(2,'0') + '/' + String(yourDate.getDate(2,'0'));
+    //console.log(formattedDate);
+
+    var time = String(yourDate.getHours() + ':' + String(yourDate.getMinutes()).padStart(2,'0'))
+    //console.log(time);
 
     //TODO make this addr variable dynamic for each user
-    var addr = 'mrfurbyb@gmail.com';
+    var addr = prompt("What email would you like to send your reminder?");
 
-    var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " Is On " + onlyDate + " At "+ time;
+    var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " is on " + formattedDate + " at "+ time;
 
     console.log(message)
 

@@ -141,7 +141,6 @@ function convertedEmailReminder(item) {
     // console.log(eventZone);
     // console.log(eventZone.length)
 
-    // TODO Convert and read in event details to local time
     //Get utc offset
     var timezoneOffset = getUTCOffset(eventZone);
     //console.log(timezoneOffset);
@@ -152,7 +151,6 @@ function convertedEmailReminder(item) {
     var yourDate = new Date(convertedDate);
     //console.log(yourDate)
 
-    // Call email function
     sendEmailReminder(eventName, yourDate);
 }
 
@@ -169,16 +167,16 @@ function getUTCOffset(eventZone){
 }
 
 function sendEmailReminder(eventName, yourDate){
-    //console.log(yourDate);
     var name = eventName;
-    console.log(name);
-    //console.log(typeof(yourDate));
+    //console.log(name);
     var ISODate = yourDate.toISOString();
-    console.log(ISODate);
+    //console.log(ISODate);
     var onlyDate = ISODate.slice(0, 10);
-    console.log(onlyDate);
+    //console.log(onlyDate);
     var time = ISODate.slice(11, 16)
     console.log(time);
+
+    //TODO make this addr variable dynamic for each user
     var addr = 'mrfurbyb@gmail.com';
 
     var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " Is On " + onlyDate + " At "+ time;

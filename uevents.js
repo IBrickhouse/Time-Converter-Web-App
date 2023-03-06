@@ -122,30 +122,30 @@ function convertedEmailReminder(item) {
     let upcomingEventDetails = (item.innerHTML.substring(3));
     let arrowIndex = upcomingEventDetails.indexOf("<");
     //console.log(arrowIndex);
-    let formattedEventDetails = upcomingEventDetails.substring(0, arrowIndex);
+    let formattedEventDetails = upcomingEventDetails.substring(0, arrowIndex).trim();
     //console.log(formattedEventDetails);
 
     var eventName = formattedEventDetails.substring(0, formattedEventDetails.indexOf('-')).trim();
     // this '20' is here because i dont think the year will ever go past the 2000's and i couldnt think of a different
     // split point.
     var eventDate = formattedEventDetails.substring(formattedEventDetails.indexOf('20'), formattedEventDetails.indexOf("at") - 1).trim();
-    var eventTime = formattedEventDetails.substring((formattedEventDetails.indexOf(':') - 2), formattedEventDetails.indexOf("in") - 1).trim();
-    var eventZone = formattedEventDetails.substring((formattedEventDetails.lastIndexOf('in') + 3), formattedEventDetails.lastIndexOf(' ')).trim();
+    var eventTime = formattedEventDetails.substring((formattedEventDetails.indexOf('at') + 3), (formattedEventDetails.lastIndexOf('in'))).trim();
+    var eventZone = formattedEventDetails.substring((formattedEventDetails.lastIndexOf('in') + 3)).trim();
 
-    // console.log(eventName);
+    //console.log('this is the event name ' + eventName);
     // console.log(eventName.length);
-    // console.log(eventDate);
+    //console.log('this is the event date ' + eventDate);
     // console.log(eventDate.length);
-    // console.log(eventTime);
+    //console.log('this is the event time ' + eventTime);
     // console.log(eventTime.length);
-    // console.log(eventZone);
+    //console.log('this is the event zone ' + eventZone);
     // console.log(eventZone.length)
 
     //Get utc offset
     var timezoneOffset = getUTCOffset(eventZone);
     //console.log(timezoneOffset);
 
-    let convertedDate = eventDate.replaceAll('/', '-') + 'T' + eventTime.slice(3)  + timezoneOffset;
+    let convertedDate = eventDate.replaceAll('/', '-') + 'T' + eventTime + timezoneOffset;
     //console.log(convertedDate);
 
     var yourDate = new Date(convertedDate);
@@ -168,12 +168,14 @@ function getUTCOffset(eventZone){
 
 function sendEmailReminder(eventName, yourDate){
     var name = eventName;
-    //console.log(name);
-    var ISODate = yourDate.toISOString();
-    //console.log(ISODate);
-    var onlyDate = ISODate.slice(0, 10);
-    //console.log(onlyDate);
-    var time = ISODate.slice(11, 16)
+    console.log(name);
+    var date = yourDate;
+    console.log(date);
+    var localeDate = date.toLocaleString().replaceAll('/', '-');
+    console.log(localeDate);
+    var onlyDate = localeDate.slice(0, 10);
+    console.log(onlyDate);
+    var time = localeDate.slice(12, 16)
     console.log(time);
 
     //TODO make this addr variable dynamic for each user

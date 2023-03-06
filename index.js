@@ -22,6 +22,7 @@ function readAndConvertEventDate() {
     let leadingZeroDate = eventDate.padStart(2, '0');
 
     let concattedDate = leadingZeroDate + 'T' + eventTime + timezone;
+    //console.log(concattedDate);
 
     let convertedDate = new Date(concattedDate);
 
@@ -84,41 +85,6 @@ function sendEmail(){
     var email = document.createElement("a");
     email.href = "mailto:"+ addr + "?subject=" + name + " Reminder&body=" + message;
     email.click();
-}
-
-// I dont think this function is even being called?
-// I'm drunk so i dont feel good enough to remove it
-// but i think i will later.
-function changeTimezone() {
-    let localDate = new Date();
-
-    let localDateString = localDate.toString();
-
-    console.log("Local Date and Time is: " + localDateString);
-
-    let formatter = new Intl.DateTimeFormat('en-US', {  weekday: 'long',
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-    //fractionalSecondDigits: 3,
-    //hour12: true,
-    timeZone: "Asia/Seoul" 
-    });
-
-    let koreaTime = formatter.format(localDate);
-    let koreatimeString = koreaTime.toString();
-    console.log('Date and Time in Korea is: ' + koreatimeString);
-
-    localHours = localDate.getHours();
-    console.log(localHours); 
-
-    koreaHours = koreaTime.getHours();
-    console.log(koreaHours);
-
-    return [localHours, koreaHours];
 }
 
 // This creates the timezone dropdown on the page.

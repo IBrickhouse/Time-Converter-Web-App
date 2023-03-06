@@ -1,3 +1,5 @@
+var DateTime = luxon.DateTime;
+
 const SUPABASE_URL = 'https://zbrjiavyonirzvqxxwos.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpicmppYXZ5b25pcnp2cXh4d29zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjE5MTIwNDgsImV4cCI6MTk3NzQ4ODA0OH0.96Pz1SXA4pVD38tafalrT5Z2J8MZlNEXXnZ0CGGkLKw'
 
@@ -15,9 +17,15 @@ async function loadData() {
         const parent = document.getElementById('holder')
 
         let contents = ''
+        i = 0;
         data.forEach(function(item){
-            contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone}</div>`
- 
+            contents += 
+                `<div id="upcomingEvent${+ i}"> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone} 
+                <br>
+                <button onclick="convertedEmailReminder(upcomingEvent${i})">Remind Me!</button>
+                <br><br>
+                </div>`
+                i++;
         })
 
         parent.insertAdjacentHTML('beforeend', contents)
@@ -41,14 +49,12 @@ async function findPastEventRecord() {
     if(!error) {
         // Length will only be over 0 if a past record is found.
         if(data.length > 0) {
-            data.forEach(function(item){
-                //console.log('I did something');     
+            data.forEach(function(item){   
                 insertPastRecord(item);
                 removePastRecord(item);
             })
         }
         else {
-            //console.log("I didnt do anything");
             {};
         }
     }
@@ -71,7 +77,6 @@ async function removePastRecord(pastRow) {
     var day = currentTime.getDate()
     var year = currentTime.getFullYear()
     var today =(String(year) + "-" + String(month) .padStart(2,'0')) + "-" + String(day) .padStart(2,'0');
-    //console.log(today);
 
     const { data, error } = await _supabase
             .from('upcomingevents')
@@ -90,7 +95,6 @@ async function findReoccurringEventRecord() {
     if(!error) {
 
         data.forEach(function(item){
-            //console.log(item);
             insertReoccurringRow(item);
         })
     }
@@ -105,6 +109,55 @@ async function insertReoccurringRow(reoccurringRow) {
       { onConflict: 'name'}
     )
     
+}
+
+function convertedEmailReminder(item) {
+    let upcomingEventDetails = (item.innerHTML.substring(3));
+    let arrowIndex = upcomingEventDetails.indexOf("<");
+
+    let formattedEventDetails = upcomingEventDetails.substring(0, arrowIndex).trim();
+
+
+    var eventName = formattedEventDetails.substring(0, formattedEventDetails.indexOf('-')).trim();
+    // this '20' is here because i dont think the year will ever go past the 2000's and i couldnt think of a different
+    // split point.
+    // I can potientially see some problems arise from the use of indexOf and lastIndex of if any of the strings are found in
+    // the event records. i think i need to find a workaround.
+    var eventDate = formattedEventDetails.substring(formattedEventDetails.indexOf('20'), formattedEventDetails.indexOf("at") - 1).trim();
+    var eventTime = formattedEventDetails.substring((formattedEventDetails.indexOf('at') + 3), (formattedEventDetails.lastIndexOf('in'))).trim();
+    var eventZone = formattedEventDetails.substring((formattedEventDetails.lastIndexOf('in') + 3)).trim();
+
+    var timezoneOffset = getUTCOffset(eventZone);
+
+    let convertedDate = eventDate.replaceAll('/', '-') + 'T' + eventTime + timezoneOffset;
+
+    var yourDate = new Date(convertedDate);
+
+    sendEmailReminder(eventName, yourDate);
+}
+
+function getUTCOffset(eventZone){
+    var eventZone = eventZone
+    var local = DateTime.local();
+    var event = local.setZone(eventZone);
+
+    eventTimeString = event.toString();
+    offsetString = eventTimeString.slice(-6)
+
+    return offsetString;
+}
+
+function sendEmailReminder(eventName, yourDate){
+    var name = eventName;
+    var formattedDate = String(yourDate.getFullYear()) + '/' + String(yourDate.getMonth() + 1).padStart(2,'0') + '/' + String(yourDate.getDate(2,'0'));
+    var time = String(yourDate.getHours() + ':' + String(yourDate.getMinutes()).padStart(2,'0'));
+    var addr = prompt("What email would you like to send your reminder?");
+
+    var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " is on " + formattedDate + " at "+ time;
+
+    var email = document.createElement("a");
+    email.href = "mailto:"+ addr + "?subject=" + name + " Reminder&body=" + message;
+    email.click();
 }
 
 loadData();

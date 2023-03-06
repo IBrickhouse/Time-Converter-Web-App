@@ -153,7 +153,6 @@ function sendEmailReminder(eventName, yourDate){
         var name = eventName;
         var formattedDate = String(yourDate.getFullYear()) + '/' + String(yourDate.getMonth() + 1).padStart(2,'0') + '/' + String(yourDate.getDate(2,'0'));
         var time = String(yourDate.getHours() + ':' + String(yourDate.getMinutes()).padStart(2,'0'));
-        //var addr = prompt("What email would you like to send your reminder?");
 
         var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " is on " + formattedDate + " at "+ time;
 

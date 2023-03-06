@@ -95,7 +95,6 @@ async function findReoccurringEventRecord() {
     if(!error) {
 
         data.forEach(function(item){
-            //console.log(item);
             insertReoccurringRow(item);
         })
     }
@@ -113,7 +112,6 @@ async function insertReoccurringRow(reoccurringRow) {
 }
 
 function convertedEmailReminder(item) {
-    // fomatting string. feels kind of hacky
     let upcomingEventDetails = (item.innerHTML.substring(3));
     let arrowIndex = upcomingEventDetails.indexOf("<");
 
@@ -140,7 +138,6 @@ function convertedEmailReminder(item) {
 
 function getUTCOffset(eventZone){
     var eventZone = eventZone
-
     var local = DateTime.local();
     var event = local.setZone(eventZone);
 
@@ -152,20 +149,11 @@ function getUTCOffset(eventZone){
 
 function sendEmailReminder(eventName, yourDate){
     var name = eventName;
-    var date = yourDate;
-    //console.log(yourDate);
     var formattedDate = String(yourDate.getFullYear()) + '/' + String(yourDate.getMonth() + 1).padStart(2,'0') + '/' + String(yourDate.getDate(2,'0'));
-    //console.log(formattedDate);
-
-    var time = String(yourDate.getHours() + ':' + String(yourDate.getMinutes()).padStart(2,'0'))
-    //console.log(time);
-
-    //TODO make this addr variable dynamic for each user
+    var time = String(yourDate.getHours() + ':' + String(yourDate.getMinutes()).padStart(2,'0'));
     var addr = prompt("What email would you like to send your reminder?");
 
     var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " is on " + formattedDate + " at "+ time;
-
-    console.log(message)
 
     var email = document.createElement("a");
     email.href = "mailto:"+ addr + "?subject=" + name + " Reminder&body=" + message;

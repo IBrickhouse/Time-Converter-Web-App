@@ -26,7 +26,6 @@ async function loadData() {
                 <br><br>
                 </div>`
                 i++;
-            //console.log(i);
         })
 
         parent.insertAdjacentHTML('beforeend', contents)
@@ -50,14 +49,12 @@ async function findPastEventRecord() {
     if(!error) {
         // Length will only be over 0 if a past record is found.
         if(data.length > 0) {
-            data.forEach(function(item){
-                //console.log('I did something');     
+            data.forEach(function(item){   
                 insertPastRecord(item);
                 removePastRecord(item);
             })
         }
         else {
-            //console.log("I didnt do anything");
             {};
         }
     }
@@ -80,7 +77,6 @@ async function removePastRecord(pastRow) {
     var day = currentTime.getDate()
     var year = currentTime.getFullYear()
     var today =(String(year) + "-" + String(month) .padStart(2,'0')) + "-" + String(day) .padStart(2,'0');
-    //console.log(today);
 
     const { data, error } = await _supabase
             .from('upcomingevents')
@@ -117,39 +113,27 @@ async function insertReoccurringRow(reoccurringRow) {
 }
 
 function convertedEmailReminder(item) {
-    //alert("I got clicked");
     // fomatting string. feels kind of hacky
     let upcomingEventDetails = (item.innerHTML.substring(3));
     let arrowIndex = upcomingEventDetails.indexOf("<");
-    //console.log(arrowIndex);
+
     let formattedEventDetails = upcomingEventDetails.substring(0, arrowIndex).trim();
-    //console.log(formattedEventDetails);
+
 
     var eventName = formattedEventDetails.substring(0, formattedEventDetails.indexOf('-')).trim();
     // this '20' is here because i dont think the year will ever go past the 2000's and i couldnt think of a different
     // split point.
+    // I can potientially see some problems arise from the use of indexOf and lastIndex of if any of the strings are found in
+    // the event records. i think i need to find a workaround.
     var eventDate = formattedEventDetails.substring(formattedEventDetails.indexOf('20'), formattedEventDetails.indexOf("at") - 1).trim();
     var eventTime = formattedEventDetails.substring((formattedEventDetails.indexOf('at') + 3), (formattedEventDetails.lastIndexOf('in'))).trim();
     var eventZone = formattedEventDetails.substring((formattedEventDetails.lastIndexOf('in') + 3)).trim();
 
-    //console.log('this is the event name ' + eventName);
-    // console.log(eventName.length);
-    //console.log('this is the event date ' + eventDate);
-    // console.log(eventDate.length);
-    //console.log('this is the event time ' + eventTime);
-    // console.log(eventTime.length);
-    //console.log('this is the event zone ' + eventZone);
-    // console.log(eventZone.length)
-
-    //Get utc offset
     var timezoneOffset = getUTCOffset(eventZone);
-    //console.log(timezoneOffset);
 
     let convertedDate = eventDate.replaceAll('/', '-') + 'T' + eventTime + timezoneOffset;
-    //console.log(convertedDate);
 
     var yourDate = new Date(convertedDate);
-    //console.log(yourDate)
 
     sendEmailReminder(eventName, yourDate);
 }

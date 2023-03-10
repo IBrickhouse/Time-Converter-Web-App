@@ -132,8 +132,8 @@ function convertedEmailReminder(item) {
     // this '20' is here because i dont think the year will ever go past the 2000's and i couldnt think of a different
     // split point.
     // I can potientially see some problems arise from the use of indexOf and lastIndex of if any of the strings are found in
-    // the event records. i think i need to find a workaround.
-    var eventDate = formattedEventDetails.substring(formattedEventDetails.indexOf('20'), formattedEventDetails.indexOf("at") - 1).trim();
+    // the event records. i think i need to find a workaround or continue testing to find out more.
+    var eventDate = formattedEventDetails.substring((formattedEventDetails.lastIndexOf('on') + 3), formattedEventDetails.indexOf("at") - 1).trim();
     var eventTime = formattedEventDetails.substring((formattedEventDetails.indexOf('at') + 3), (formattedEventDetails.lastIndexOf('in'))).trim();
     var eventZone = formattedEventDetails.substring((formattedEventDetails.lastIndexOf('in') + 3)).trim();
 
@@ -142,6 +142,7 @@ function convertedEmailReminder(item) {
     let convertedDate = eventDate.replaceAll('/', '-') + 'T' + eventTime + timezoneOffset;
 
     var yourDate = new Date(convertedDate);
+
 
     sendEmailReminder(eventName, yourDate);
 }
@@ -161,9 +162,9 @@ function sendEmailReminder(eventName, yourDate){
     var addr = prompt("What email would you like to send your reminder?");
     if (addr !== null) {
         var name = eventName;
+        //console.log(yourDate);
         var formattedDate = String(yourDate.getFullYear()) + '/' + String(yourDate.getMonth() + 1).padStart(2,'0') + '/' + String(yourDate.getDate()) .padStart(2,'0');
         var time = String(yourDate.getHours() + ':' + String(yourDate.getMinutes()).padStart(2,'0'));
-
         var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " is on " + formattedDate + " at "+ time;
 
         var email = document.createElement("a");

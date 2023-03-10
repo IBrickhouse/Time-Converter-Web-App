@@ -169,7 +169,7 @@ function sendEmailReminder(eventName, yourDate){
         var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " is on " + formattedDate + " at "+ time;
 
         var email = document.createElement("a");
-        email.href = "mailto:"+ addr + "?subject=" + name + " Reminder&body=" + message;
+        email.href = "mailto:"+ addr + "?subject=" + name + "&body=" + message;
         email.click();
     }
 }

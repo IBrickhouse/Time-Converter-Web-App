@@ -31,7 +31,6 @@ async function loadData() {
 
         parent.insertAdjacentHTML('beforeend', contents)
     }
-    
 }
 
 function checkWhere(item){
@@ -68,7 +67,6 @@ async function findPastEventRecord() {
             {};
         }
     }
-    
 }
 
 async function insertPastRecord(pastRow) {
@@ -76,8 +74,7 @@ async function insertPastRecord(pastRow) {
     .from('pastevents')
     .insert([
       {name: pastRow.name, description: pastRow.description, date: pastRow.date, time: pastRow.time, timezone: pastRow.timezone, reoccurring: pastRow.reoccurring},
-    ])
-    
+    ])   
 }
 
 async function removePastRecord(pastRow) {
@@ -92,7 +89,6 @@ async function removePastRecord(pastRow) {
             .from('upcomingevents')
             .delete()
             .lt('date', today)
-    
 }
 
 async function findReoccurringEventRecord() {
@@ -108,7 +104,6 @@ async function findReoccurringEventRecord() {
             insertReoccurringRow(item);
         })
     }
-    
 }
 
 async function insertReoccurringRow(reoccurringRow) {
@@ -118,7 +113,6 @@ async function insertReoccurringRow(reoccurringRow) {
       { name: reoccurringRow.name, description: reoccurringRow.description, date: reoccurringRow.date, time: reoccurringRow.time, timezone: reoccurringRow.timezone, reoccurring: reoccurringRow.reoccurring},
       { onConflict: 'name'}
     )
-    
 }
 
 function convertedEmailReminder(item) {
@@ -127,10 +121,7 @@ function convertedEmailReminder(item) {
 
     let formattedEventDetails = upcomingEventDetails.substring(0, arrowIndex).trim();
 
-
     var eventName = formattedEventDetails.substring(0, formattedEventDetails.indexOf('-')).trim();
-    // this '20' is here because i dont think the year will ever go past the 2000's and i couldnt think of a different
-    // split point.
     // I can potientially see some problems arise from the use of indexOf and lastIndex of if any of the strings are found in
     // the event records. i think i need to find a workaround or continue testing to find out more.
     var eventDate = formattedEventDetails.substring((formattedEventDetails.lastIndexOf('on') + 3), formattedEventDetails.indexOf("at") - 1).trim();
@@ -142,7 +133,6 @@ function convertedEmailReminder(item) {
     let convertedDate = eventDate.replaceAll('/', '-') + 'T' + eventTime + timezoneOffset;
 
     var yourDate = new Date(convertedDate);
-
 
     sendEmailReminder(eventName, yourDate);
 }
@@ -162,13 +152,11 @@ function sendEmailReminder(eventName, yourDate){
     var addr = prompt("What email would you like to send your reminder?");
     if (addr !== null) {
         var name = eventName;
-        console.log(yourDate);
         var formattedDate = String(yourDate.getFullYear()) + '/' + String(yourDate.getMonth() + 1).padStart(2,'0') + '/' + String(yourDate.getDate()) .padStart(2,'0');
         var time = String(yourDate.getHours()).padStart(2,'0') + ':' + String(yourDate.getMinutes()).padStart(2,'0');
-        console.log(time);
         var message = "Hi there! " + "\n" + "Your event called " + name + "\n" + " is on " + formattedDate + " at "+ time;
-
         var email = document.createElement("a");
+
         email.href = "mailto:"+ addr + "?subject=" + name + "&body=" + message;
         email.click();
     }

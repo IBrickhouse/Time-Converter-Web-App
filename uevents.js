@@ -22,6 +22,7 @@ async function loadData() {
             contents += 
                 `<div id="upcomingEvent${+ i}"> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone} 
                 <br>
+                ${checkWhere(item)}
                 <button onclick="convertedEmailReminder(upcomingEvent${i})">Remind Me!</button>
                 <br><br>
                 </div>`
@@ -31,6 +32,15 @@ async function loadData() {
         parent.insertAdjacentHTML('beforeend', contents)
     }
     
+}
+
+function checkWhere(item){
+    if (item.where !== null) { 
+        return `<a href="${item.where}">${item.where}</a><br>`;
+    }
+    else {
+        return ``
+    }  
 }
 
 async function findPastEventRecord() {

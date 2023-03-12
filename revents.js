@@ -14,7 +14,9 @@ async function loadData() {
 
         let contents = ''
         data.forEach(function(item){
-            contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.slice(5).replace('-', '/')} at ${item.time} in ${item.timezone}</div>`
+            contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.slice(5).replace('-', '/')} at ${item.time} in ${item.timezone}
+            <br><br>
+            </div>`
  
         })
 

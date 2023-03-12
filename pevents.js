@@ -3,24 +3,60 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
+// async function loadData() {
+//     const { data, error } = await _supabase
+//             .from('pastevents')
+//             .select('*')
+
+//     if(!error) {
+//         //loop display data here
+//         const parent = document.getElementById('holder')
+
+//         let contents = ''
+//         data.forEach(function(item){
+//             contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone}</div>`
+ 
+//         })
+
+//         parent.insertAdjacentHTML('beforeend', contents)
+//     }
+    
+// }
+
 async function loadData() {
+
     const { data, error } = await _supabase
             .from('pastevents')
             .select('*')
 
     if(!error) {
+
         //loop display data here
         const parent = document.getElementById('holder')
 
         let contents = ''
+        i = 0;
         data.forEach(function(item){
-            contents += `<div> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone}</div>`
- 
+            contents += 
+                `<div id="pastEvent${+ i}"> &#8226; ${item.name} - ${item.description} on ${item.date.replaceAll('-', '/')} at ${item.time} in ${item.timezone} 
+                <br>
+                ${checkWhere(item)}
+                <br>
+                </div>`
+                i++;
         })
 
         parent.insertAdjacentHTML('beforeend', contents)
     }
-    
+}
+
+function checkWhere(item){
+    if (item.where !== null) { 
+        return `<a href="${item.where}">${item.where}</a><br>`;
+    }
+    else {
+        return ``
+    }  
 }
 
 loadData();

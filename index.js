@@ -16,6 +16,7 @@ function readAndConvertEventDate() {
 
     //gets the utc offset for user submitted timezone
     var timezone = getUTCOffset(eventZone);
+    //console.log(timezone)
 
     document.getElementById("eventName").value = eventName;
 
@@ -25,6 +26,7 @@ function readAndConvertEventDate() {
     //console.log(concattedDate);
 
     let convertedDate = new Date(concattedDate);
+    //console.log(convertedDate)
 
     document.getElementById("convertedDate").value = convertedDate.getFullYear() + '-' + String(convertedDate.getMonth() + 1) .padStart(2, '0') + '-' + String(convertedDate.getDate()) .padStart(2, '0');
 
@@ -36,14 +38,21 @@ function readAndConvertEventDate() {
 
 function getUTCOffset(){
     var eventZone = document.getElementById("whenZone").value;
+    //console.log(eventZone)
 
     var local = DateTime.local();
     var event = local.setZone(eventZone);
 
     eventTimeString = event.toString();
+
+    if (eventZone == "UTC") {
+        eventTimeString = eventTimeString.concat('-00:00')
+    }
+
     offsetString = eventTimeString.slice(-6)
 
     return offsetString;
+    
 }
 
 async function addEvent() {

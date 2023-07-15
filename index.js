@@ -109,5 +109,11 @@ for(var i = 0; i < options.length; i++) {
     var el = document.createElement("option");
     el.textContent = opt;
     el.value = opt;
-    select.appendChild(el);
+    //console.log(el.value)
+    if (el.value != 'UTC'){
+        select.appendChild(el);
+    }
+    
+    //console.log(i)
+
 }
